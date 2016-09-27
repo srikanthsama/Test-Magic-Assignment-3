@@ -114,7 +114,13 @@ e
 		loanList.remove(loan);
 		updateState();
 	}
-	
+	public void removeLoan(ILoan loan) {
+		if (loan == null || !loanList.contains(loan)) {
+			throw new RuntimeException(String.format("Member: removeLoan : loan is null or not found in loanList"));
+		}
+		loanList.remove(loan);
+		updateState();
+	}
 
 	
 	public EMemberState getState() {
