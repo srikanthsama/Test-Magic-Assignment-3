@@ -9,15 +9,7 @@ import library.interfaces.entities.EMemberState;
 
 
 public class Member implements IMember{
-	private final String firstName;
-	private final String lastName;
-	private final String contactPhone;
-	private final String emailAddress;
-	private final int id;
-	
-	private EMemberState state;
-	private List<ILoan> loanList;
-	private float totalFines;
+
 	
 	public Member(String firstName, String lastName, String contactPhone,
 			String email, int memberID) {
@@ -111,17 +103,9 @@ public class Member implements IMember{
 		return Collections.unmodifiableList(loanList);
 	}
 
-	@Override
-	public void removeLoan(ILoan loan) {
-		if (loan == null || !loanList.contains(loan)) {
-			throw new RuntimeException(String.format("Member: removeLoan : loan is null or not found in loanList"));
-		}
-		loanList.remove(loan);
-		updateState();
-	}
+	
 
 	
-	@Override
 	public EMemberState getState() {
 		return state;
 	}
@@ -130,54 +114,6 @@ public class Member implements IMember{
 	@Override
 	public String getFirstName() {
 		return firstName;
-	}
-
-	
-	@Override
-	public String getLastName() {
-		return lastName;
-	}
-
-	
-	@Override
-	public String getContactPhone() {
-		return contactPhone;
-	}
-
-	
-	@Override
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-
-	
-	@Override
-	public int getID() {
-		return id;
-	}
-
-	
-	@Override
-	public String toString() {
-		return String.format(
-				"Id: %d\nName: %s %s\nContact Phone: %s\nEmail: %s\nOutstanding Charges: %0.2f", id,
-				firstName, lastName, contactPhone, emailAddress, totalFines);
-	}
-
-	private Boolean borrowingAllowed() {
-		boolean b = !hasOverDueLoans() &&
-				!hasReachedFineLimit() &&
-				!hasReachedLoanLimit();
-		return b;
-	}
-
-	private void updateState() {
-		if (borrowingAllowed()) {
-			state = EMemberState.BORROWING_ALLOWED;
-		}
-		else {
-			state = EMemberState.BORROWING_DISALLOWED;
-		}
 	}
 
 
