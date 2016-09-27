@@ -146,5 +146,13 @@ e
 				!hasReachedLoanLimit();
 		return b;
 	}
+	private void updateState() {
+		if (borrowingAllowed()) {
+			state = EMemberState.BORROWING_ALLOWED;
+		}
+		else {
+			state = EMemberState.BORROWING_DISALLOWED;
+		}
+	}
 
 }
