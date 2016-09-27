@@ -11,6 +11,9 @@ import library.interfaces.daos.IMemberHelper;
 
 
 public class MemberMapDAO implements IMemberDAO{
+	private IMemberHelper helper;
+	private Map<Integer, IMember> memberMap;
+	private int nextID;	
 	
 	public MemberMapDAO(IMemberHelper helper) {
 		if (helper == null ) {
