@@ -46,6 +46,24 @@ c IMember addMember(String firstName, String lastName,
 		}
 		return null;
 	}
+	public List<IMember> listMembers() {
+		List<IMember> list = new ArrayList<IMember>(memberMap.values());
+		return Collections.unmodifiableList(list);
+	}
 
+	@Override
+	public List<IMember> findMembersByLastName(String lastName) {
+		if ( lastName == null || lastName.isEmpty()) {
+			throw new IllegalArgumentException(
+				String.format("MemberMapDAO : findMembersByLastName : lastName cannot be null or blank"));
+		}
+		List<IMember> list = new ArrayList<IMember>();
+		for (IMember m : memberMap.values()) {
+			if (lastName.equals(m.getLastName())) {
+				list.add(m);
+			}
+		}
+		return Collections.unmodifiableList(list);
+	}
 }	
 	
