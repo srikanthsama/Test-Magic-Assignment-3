@@ -48,8 +48,6 @@ public class Member implements IMember{
 				);
 	}
 
-
-	@Override
 	public boolean hasOverDueLoans() {
 		for (ILoan loan : loanList) {
 			if (loan.isOverDue()) {
@@ -59,30 +57,27 @@ public class Member implements IMember{
 		return false;
 	}
 
-	@Override
+
 	public boolean hasReachedLoanLimit() {
 		boolean b = loanList.size() >= IMember.LOAN_LIMIT;
 		return b;
 	}
 
-	@Override
 	public boolean hasFinesPayable() {
 		boolean b = totalFines > 0.0f;
 		return b;
 	}
 
-	@Override
+
 	public boolean hasReachedFineLimit() {
 		boolean b = totalFines >= IMember.FINE_LIMIT;
 		return b;
 	}
 
-	@Override
 	public float getFineAmount() {
 		return totalFines;
 	}
 
-	@Override
 	public void addFine(float fine) {
 		if (fine < 0) {
 			throw new RuntimeException(String.format("Member: addFine : fine cannot be negative"));
@@ -91,7 +86,6 @@ public class Member implements IMember{
 		updateState();
 	}
 
-	@Override
 	public void payFine(float payment) {
 		if (payment < 0 || payment > totalFines) {
 			throw new RuntimeException(String.format("Member: addFine : payment cannot be negative or greater than totalFines"));
@@ -99,8 +93,8 @@ public class Member implements IMember{
 		totalFines -= payment;
 		updateState();
 	}
-
-	@Override
+i
+e
 	public void addLoan(ILoan loan) {
 		if (!borrowingAllowed()) {
 			throw new RuntimeException(String.format("Member: addLoan : illegal operation in state: %s", state));
@@ -109,11 +103,17 @@ public class Member implements IMember{
 		updateState();
 	}
 
-	@Override
+
 	public List<ILoan> getLoans() {
 		return Collections.unmodifiableList(loanList);
 	}
-
+	public void removeLoan(ILoan loan) {
+		if (loan == null || !loanList.contains(loan)) {
+			throw new RuntimeException(String.format("Member: removeLoan : loan is null or not found in loanList"));
+		}
+		loanList.remove(loan);
+		updateState();
+	}
 	
 
 	
