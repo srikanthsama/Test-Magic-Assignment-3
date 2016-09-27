@@ -40,7 +40,12 @@ c IMember addMember(String firstName, String lastName,
 		memberMap.put(Integer.valueOf(id), mem);
 		return mem;
 	}
-
+	public IMember getMemberByID(int id) {
+		if (memberMap.keySet().contains(Integer.valueOf(id))) {
+			return memberMap.get(Integer.valueOf(id));
+		}
+		return null;
+	}
 
 }	
 	
