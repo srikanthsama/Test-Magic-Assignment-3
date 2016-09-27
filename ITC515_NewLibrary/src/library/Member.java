@@ -134,5 +134,17 @@ e
 	}
 
 
+	public String toString() {
+		return String.format(
+				"Id: %d\nName: %s %s\nContact Phone: %s\nEmail: %s\nOutstanding Charges: %0.2f", id,
+				firstName, lastName, contactPhone, emailAddress, totalFines);
+	}
+
+	private Boolean borrowingAllowed() {
+		boolean b = !hasOverDueLoans() &&
+				!hasReachedFineLimit() &&
+				!hasReachedLoanLimit();
+		return b;
+	}
 
 }
