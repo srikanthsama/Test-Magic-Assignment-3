@@ -10,6 +10,17 @@ import library.interfaces.entities.EMemberState;
 
 public class Member implements IMember{
 
+	private final String firstName;
+	private final String lastName;
+	private final String contactPhone;
+	private final String emailAddress;
+	private final int id;
+	
+	private EMemberState state;
+	private List<ILoan> loanList;
+	private float totalFines;
+	
+
 	
 	public Member(String firstName, String lastName, String contactPhone,
 			String email, int memberID) {
