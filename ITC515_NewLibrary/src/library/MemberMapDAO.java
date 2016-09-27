@@ -33,6 +33,14 @@ public class MemberMapDAO implements IMemberDAO{
 		}
 		this.memberMap = memberMap;
 	}
+c IMember addMember(String firstName, String lastName,
+			String contactPhone, String emailAddress) {
+		int id = getNextId();
+		IMember mem = helper.makeMember(firstName, lastName, contactPhone, emailAddress, id);
+		memberMap.put(Integer.valueOf(id), mem);
+		return mem;
+	}
 
-	
+
+}	
 	
